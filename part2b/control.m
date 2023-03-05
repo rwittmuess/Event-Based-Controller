@@ -15,8 +15,8 @@ in_air = 1;
 on_ground_going_down = 2;
 on_ground_going_up = 3;
 
-hip_air_k = 10;
-hip_air_b = 1;
+hip_air_k = 1000;
+hip_air_b = 20;
 hip_grnd_k = 10;
 hip_grnd_b = 1;
 
