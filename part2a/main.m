@@ -15,7 +15,23 @@ figure(1) % choose right plot target
 
 % intialize variables.
 % stuff we want to control
+
+%
+%
+%
+%
+%
+%
+
 height_desired = 0.6;
+
+%
+%
+%
+%
+%
+%
+
 speed_desired = 1.0;
 
 % constants
