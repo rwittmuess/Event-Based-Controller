@@ -24,7 +24,21 @@ leg_length_default = 0.5;
 
 leg_length_gain = 0.0;
 
+
+
+
+
+
+%rest_leg_length = leg_length_default;
 rest_leg_length = leg_length_default;
+
+
+
+
+
+
+
+
 
 hip_torque = 0;   
 
@@ -78,14 +92,33 @@ end;
 if control_state == on_ground_going_up
   % SET rest_leg_length TO ADD ENERGY
   %rest_leg_length = leg_length_default;
+   
+
+
+
 
 %   rest_leg_length = rest_leg_length ...
 %                     + 0.6 * (height_desired-last_max_height) ...
 %                     + 0 * leg_length_gain ...
 %                     + 0.0;  
-  leg_length_new
-  rest_leg_length = rest_leg_length ...
-                    + 0.6 * (height_desired-last_max_height);%+rest_leg_length;
+
+%   rest_leg_length = (rest_leg_length) ...
+%                     + 0.6 * (height_desired-last_max_height) ...
+%     	            + 0.01 * leg_lengthd ...
+%                     + 0;
+
+%   rest_leg_length = (leg_length_default) ...
+%                     + 0.65 * (height_desired-last_max_height) ...
+%                     - 0.007;
+
+ rest_leg_length = (rest_leg_length) ...
+                    + 0.7 * (height_desired-last_max_height) ...
+                    - 0.02 * leg_lengthd ...
+                    + 0.0;
+
+  % + 0.03 * leg_lengthd ...
+
+
 
   if leg_length_new > rest_leg_length
     control_state = in_air;
