@@ -74,9 +74,11 @@ if control_state == on_ground_going_down
   hip_torque = 0;
 end;
 
+
 if control_state == on_ground_going_up
   % SET rest_leg_length TO ADD ENERGY
-  rest_leg_length = leg_length_default;
+  rest_leg_length =  sqrt((1*9.81*height_desired-1*9.81*y-1/2*1*yd.^2)*2/200) + leg_length;
+
   if leg_length_new > rest_leg_length
     control_state = in_air;
     max_height = y;
