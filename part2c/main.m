@@ -1,3 +1,4 @@
+clc; close all; clear all;
 % simulate a Raibert hopper
 
 initdraw

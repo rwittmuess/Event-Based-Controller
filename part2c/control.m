@@ -15,10 +15,10 @@ in_air = 1;
 on_ground_going_down = 2;
 on_ground_going_up = 3;
 
-hip_air_k = 10;
-hip_air_b = 1;
-hip_grnd_k = 10;
-hip_grnd_b = 1;
+hip_air_k = 1000;
+hip_air_b = 20;
+hip_grnd_k = 100;  %todo
+hip_grnd_b = 10;    %todo
 
 leg_length_default = 0.5;
 
@@ -38,7 +38,7 @@ if control_state == init
 end;
 
 if control_state == in_air
-  if y <= rest_leg_length
+  if foot_y_new < 0
     last_touchdown_time = time;
     if yd <= 0
       control_state = on_ground_going_down;
@@ -48,8 +48,14 @@ if control_state == in_air
     result = control_state;
     return;
   end;
-  leg_angle_desired = 0;
-  hip_torque = 0;
+  %leg_angle_desired = -0.5;
+
+  gain=0.024; %todo
+  leg_angle_desired = asin((xd*last_bounce_time/2 + gain*(xd-speed_desired))/(rest_leg_length));
+
+
+  hip_torque = hip_air_k*(leg_angle - leg_angle_desired) + ...
+                             hip_air_b*leg_angled;
   if ( y > max_height )
     max_height = y;
   end;
@@ -71,14 +77,11 @@ if control_state == on_ground_going_down
     result = control_state;
     return;
   end;
-  hip_torque = 0;
+  hip_torque = hip_grnd_k*(-body_angle) - hip_grnd_b*body_angled;
 end;
 
-
 if control_state == on_ground_going_up
-  % SET rest_leg_length TO ADD ENERGY
   rest_leg_length =  sqrt((1*9.81*height_desired-1*9.81*y-1/2*1*yd.^2)*2/200) + leg_length;
-
   if leg_length_new > rest_leg_length
     control_state = in_air;
     max_height = y;
@@ -94,5 +97,5 @@ if control_state == on_ground_going_up
     result = control_state;
     return;
   end;
-  hip_torque = 0;
+  hip_torque = hip_grnd_k*(-body_angle) - hip_grnd_b*body_angled;
 end;
