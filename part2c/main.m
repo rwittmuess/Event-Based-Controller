@@ -15,14 +15,12 @@ global p_error i_error d_error
 
 figure(1) % choose right plot target
 
-% intialize variables.
-% stuff we want to control
-p_error   = []
-i_error   = []
-d_error  = []
+p_error   = [];
+i_error   = [];
+d_error  = [];
 
 height_desired = 0.6;
-speed_desired = 1;
+speed_desired = 0.5;
 
 % constants
 dt = 0.001;
@@ -31,7 +29,7 @@ dt = 0.001;
 time = 0.0;
 x = 0.0;
 y = 1.0;
-xd = 0.0;
+xd = 0.0; 
 yd = 0.0;
 body_angle = 0;
 leg_angle = 0.0;

@@ -17,7 +17,7 @@ on_ground_going_down = 2;
 on_ground_going_up = 3;
 
 hip_air_k = 1000;
-hip_air_b = 20;
+hip_air_b = 25;
 hip_grnd_k = 100;
 hip_grnd_b = 10;
 
@@ -54,7 +54,7 @@ if control_state == in_air
   p_error   = [p_error; speed_desired-xd];
   i_error   = [i_error; sum(p_error)];
   if isempty(d_error); d_error=0; else d_error=[d_error; p_error(end)-p_error(end-1)]; end
-  leg_angle_desired = asin((xd*last_bounce_time/2 + gain*(xd-speed_desired))/(rest_leg_length))... % +(last_bounce_time-0.275)*1;
+  leg_angle_desired = asin((xd*last_bounce_time/2 + gain*(xd-speed_desired))/(rest_leg_length))...
                         -0.00006*i_error(end)...
                         +10*d_error(end);
 
