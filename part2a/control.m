@@ -71,7 +71,7 @@ if control_state == on_ground_going_down
     result = control_state;
     return;
   end;
-  hip_torque = 0;
+  hip_torque = hip_grnd_k*(-body_angle) - hip_grnd_b*body_angled;
 end;
 
 

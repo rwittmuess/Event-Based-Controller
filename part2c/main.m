@@ -11,13 +11,18 @@ global leg_state foot_x foot_y leg_lengthd leg_length rest_leg_length
 global control_state height_desired leg_angle_desired last_bounce_time
 global last_touchdown_time last_takeoff_time max_height last_max_height
 global speed_desired
+global p_error i_error d_error
 
 figure(1) % choose right plot target
 
 % intialize variables.
 % stuff we want to control
+p_error   = []
+i_error   = []
+d_error  = []
+
 height_desired = 0.6;
-speed_desired = 1.0;
+speed_desired = 1;
 
 % constants
 dt = 0.001;
